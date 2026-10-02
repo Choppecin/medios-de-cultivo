@@ -223,16 +223,16 @@
     }
 
     .section-label {
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      color: var(--text-tertiary);
+      color: #000000;
     }
 
     .section-content {
       font-size: 13.5px;
-      color: var(--text-primary);
+      color: #000000;
       line-height: 1.55;
       word-break: break-word;
     }
@@ -428,15 +428,7 @@
     }
 
     .card-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 3px 9px;
-      font-size: 11.5px;
-      font-weight: 700;
-      color: var(--apple-blue);
-      background: rgba(0, 113, 227, 0.08);
-      border-radius: var(--radius-full);
-      letter-spacing: 0.02em;
+      display: none;
     }
 
     .card-expand-btn {
@@ -456,9 +448,9 @@
     }
 
     .card-expand-btn:hover {
-      color: var(--apple-blue);
-      background: rgba(0, 113, 227, 0.1);
-      border-color: rgba(0, 113, 227, 0.25);
+      color: #000000;
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.2);
       transform: scale(1.04);
     }
 
@@ -538,13 +530,7 @@
     }
 
     .detail-badge {
-      padding: 4px 10px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #ffffff;
-      background: var(--apple-blue);
-      border-radius: var(--radius-full);
-      white-space: nowrap;
+      display: none;
     }
 
     .detail-title {
@@ -580,9 +566,9 @@
     }
 
     .detail-nav-btn:hover:not(:disabled) {
-      background: rgba(0, 113, 227, 0.1);
-      border-color: rgba(0, 113, 227, 0.3);
-      color: var(--apple-blue);
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.2);
+      color: #000000;
     }
 
     .detail-nav-btn:disabled {
@@ -674,14 +660,14 @@
       font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--apple-blue);
+      letter-spacing: 0.04em;
+      color: #000000;
     }
 
     .detail-section-content {
       font-size: 15px;
       line-height: 1.6;
-      color: var(--text-primary);
+      color: #000000;
     }
 
     .detail-footer {
@@ -706,11 +692,11 @@
     }
 
     .detail-footer-btn.primary {
-      background: var(--apple-blue);
+      background: #000000;
       color: #ffffff;
     }
     .detail-footer-btn.primary:hover {
-      background: #0077ed;
+      background: #222222;
     }
 
     .detail-footer-btn.secondary {
@@ -829,7 +815,7 @@
         const card = document.createElement('article');
         card.className = 'media-card';
         card.id = `card-${idx}`;
-        card.title = "Haz clic para ampliar y ver desplegada";
+        
 
         const photoHtml = item.image 
           ? `<div class="card-photo-frame" onclick="event.stopPropagation(); openDetailModal(${idx});"><img src="${item.image}" alt="${item.name}" loading="lazy"></div>`
@@ -837,7 +823,7 @@
 
         card.innerHTML = `
           <div class="card-header-row">
-            <span class="card-badge">#${item.index}</span>
+            
             <button class="card-expand-btn" title="Ampliar y desplegar tarjeta" onclick="event.stopPropagation(); openDetailModal(${idx});">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
@@ -965,7 +951,7 @@
           : `<span class="no-photo-badge">Sin foto</span>`;
 
         tr.style.cursor = 'pointer';
-        tr.title = 'Haz clic para desplegar y ver ampliada';
+        
         tr.addEventListener('click', (e) => {
           if (e.target.tagName === 'IMG') return;
           openDetailModal(idx);
@@ -1074,7 +1060,7 @@
       const photoHtml = item.image 
         ? `<div class="detail-photo-wrap" onclick="openLightbox('${item.image}')">
              <img src="${item.image}" alt="${item.name}">
-             <span class="detail-photo-badge">🔍 Clic para ampliar a pantalla completa</span>
+             
            </div>`
         : `<div class="no-photo-badge" style="padding: 24px; background: rgba(0,0,0,0.03); border-radius: 14px;">Sin registro fotográfico disponible en el documento</div>`;
 
@@ -1084,7 +1070,7 @@
       dialog.innerHTML = `
         <div class="detail-header">
           <div class="detail-title-wrap">
-            <span class="detail-badge">#${item.index} de ${MEDIA_DATA.length}</span>
+            
             <h2 class="detail-title" title="${item.name}">${item.name}</h2>
           </div>
           <div class="detail-header-actions">
@@ -1119,7 +1105,7 @@
         </div>
 
         <div class="detail-footer">
-          <span class="detail-keyboard-hint">Atajos: <strong>←</strong> / <strong>→</strong> navegar • <strong>Esc</strong> cerrar</span>
+          
           <button class="detail-footer-btn secondary" onclick="closeDetailModal()">Cerrar</button>
         </div>
       `;
