@@ -418,7 +418,315 @@
       box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
       object-fit: contain;
     }
-  </style>
+  
+    /* Card Header Row & Expand Button */
+    .card-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2px;
+    }
+
+    .card-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 9px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--apple-blue);
+      background: rgba(0, 113, 227, 0.08);
+      border-radius: var(--radius-full);
+      letter-spacing: 0.02em;
+    }
+
+    .card-expand-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      font-family: inherit;
+    }
+
+    .card-expand-btn:hover {
+      color: var(--apple-blue);
+      background: rgba(0, 113, 227, 0.1);
+      border-color: rgba(0, 113, 227, 0.25);
+      transform: scale(1.04);
+    }
+
+    .media-card {
+      cursor: pointer;
+    }
+
+    /* ---------------- CARD DETAIL MODAL (DESPLEGADA Y AMPLIADA) ---------------- */
+    .card-detail-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      z-index: 2500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .card-detail-modal.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .card-detail-dialog {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 24px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.28), 0 4px 16px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 820px;
+      max-height: 90vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: modalSpring 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalSpring {
+      from {
+        opacity: 0;
+        transform: scale(0.92) translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .detail-header {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      z-index: 10;
+    }
+
+    .detail-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .detail-badge {
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      background: var(--apple-blue);
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+    }
+
+    .detail-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .detail-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .detail-nav-btn {
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(0, 0, 0, 0.03);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-primary);
+      transition: all 0.16s ease;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .detail-nav-btn:hover:not(:disabled) {
+      background: rgba(0, 113, 227, 0.1);
+      border-color: rgba(0, 113, 227, 0.3);
+      color: var(--apple-blue);
+    }
+
+    .detail-nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .detail-close-btn {
+      border: none;
+      background: rgba(0, 0, 0, 0.06);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 18px;
+      font-weight: 500;
+      transition: all 0.16s ease;
+      margin-left: 6px;
+    }
+
+    .detail-close-btn:hover {
+      background: rgba(0, 0, 0, 0.12);
+      color: var(--text-primary);
+      transform: scale(1.05);
+    }
+
+    .detail-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .detail-photo-wrap {
+      width: 100%;
+      height: 320px;
+      border-radius: var(--radius-lg);
+      background: #f0f0f4;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      position: relative;
+      cursor: zoom-in;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .detail-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .detail-photo-wrap:hover img {
+      transform: scale(1.03);
+    }
+
+    .detail-photo-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      pointer-events: none;
+    }
+
+    .detail-section {
+      background: rgba(0, 0, 0, 0.025);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .detail-section-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--apple-blue);
+    }
+
+    .detail-section-content {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+
+    .detail-footer {
+      border-top: 1px solid rgba(0, 0, 0, 0.07);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fafafc;
+      border-radius: 0 0 24px 24px;
+    }
+
+    .detail-footer-btn {
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      border: none;
+      transition: all 0.16s ease;
+      font-family: inherit;
+    }
+
+    .detail-footer-btn.primary {
+      background: var(--apple-blue);
+      color: #ffffff;
+    }
+    .detail-footer-btn.primary:hover {
+      background: #0077ed;
+    }
+
+    .detail-footer-btn.secondary {
+      background: rgba(0, 0, 0, 0.06);
+      color: var(--text-primary);
+    }
+    .detail-footer-btn.secondary:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .detail-keyboard-hint {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+</style>
 </head>
 <body>
 
@@ -478,6 +786,14 @@
     </div>
   </section>
 
+  
+  <!-- CARD DETAIL MODAL (DESPLEGADA Y AMPLIADA) -->
+  <div class="card-detail-modal" id="card-detail-modal" onclick="onDetailBackdropClick(event)">
+    <div class="card-detail-dialog" id="card-detail-dialog" onclick="event.stopPropagation()">
+      <!-- Contenido inyectado dinámicamente -->
+    </div>
+  </div>
+
   <!-- PHOTO LIGHTBOX -->
   <div class="lightbox-modal" id="lightbox-modal" onclick="closeLightbox()">
     <img src="" alt="Fotografía real ampliada" class="lightbox-img" id="lightbox-img">
@@ -513,12 +829,23 @@
         const card = document.createElement('article');
         card.className = 'media-card';
         card.id = `card-${idx}`;
+        card.title = "Haz clic para ampliar y ver desplegada";
 
         const photoHtml = item.image 
-          ? `<div class="card-photo-frame" onclick="openLightbox('${item.image}')"><img src="${item.image}" alt="${item.name}" loading="lazy"></div>`
-          : `<div class="card-photo-frame"><span class="no-photo-badge">Sin fotografía disponible en el documento</span></div>`;
+          ? `<div class="card-photo-frame" onclick="event.stopPropagation(); openDetailModal(${idx});"><img src="${item.image}" alt="${item.name}" loading="lazy"></div>`
+          : `<div class="card-photo-frame" onclick="event.stopPropagation(); openDetailModal(${idx});"><span class="no-photo-badge">Sin fotografía disponible en el documento</span></div>`;
 
         card.innerHTML = `
+          <div class="card-header-row">
+            <span class="card-badge">#${item.index}</span>
+            <button class="card-expand-btn" title="Ampliar y desplegar tarjeta" onclick="event.stopPropagation(); openDetailModal(${idx});">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+              </svg>
+              <span>Desplegar</span>
+            </button>
+          </div>
+
           <h2 class="card-title">${item.name}</h2>
 
           ${photoHtml}
@@ -544,14 +871,16 @@
           </div>
         `;
 
-        // Freeform dragging
+        // Freeform dragging vs Click Detection
         let isCardDragging = false;
         let cardStartX = 0, cardStartY = 0;
         let initialCardLeft = 0, initialCardTop = 0;
+        let cardHasMoved = false;
 
         card.addEventListener('mousedown', (e) => {
-          if (spacePressed || e.button !== 0 || e.target.tagName === 'IMG' || e.target.tagName === 'A') return;
+          if (spacePressed || e.button !== 0 || e.target.closest('button')) return;
           isCardDragging = true;
+          cardHasMoved = false;
           cardStartX = e.clientX;
           cardStartY = e.clientY;
           initialCardLeft = cardLayoutPositions[item.name] ? cardLayoutPositions[item.name].x : 0;
@@ -564,6 +893,9 @@
           if (!isCardDragging) return;
           const dx = (e.clientX - cardStartX) / canvasState.scale;
           const dy = (e.clientY - cardStartY) / canvasState.scale;
+          if (Math.hypot(dx, dy) > 5) {
+            cardHasMoved = true;
+          }
           const newX = initialCardLeft + dx;
           const newY = initialCardTop + dy;
           cardLayoutPositions[item.name] = { x: newX, y: newY };
@@ -576,6 +908,12 @@
             isCardDragging = false;
             card.classList.remove('is-dragging');
           }
+        });
+
+        // Click to open detailed expanded modal
+        card.addEventListener('click', (e) => {
+          if (cardHasMoved) return; // Ignore drag release
+          openDetailModal(idx);
         });
 
         canvasSurface.appendChild(card);
@@ -625,6 +963,13 @@
         const photoHtml = item.image 
           ? `<img src="${item.image}" alt="${item.name}" class="table-real-thumb" onclick="openLightbox('${item.image}')">`
           : `<span class="no-photo-badge">Sin foto</span>`;
+
+        tr.style.cursor = 'pointer';
+        tr.title = 'Haz clic para desplegar y ver ampliada';
+        tr.addEventListener('click', (e) => {
+          if (e.target.tagName === 'IMG') return;
+          openDetailModal(idx);
+        });
 
         tr.innerHTML = `
           <td style="font-weight:700; color:var(--text-primary);">
@@ -716,6 +1061,92 @@
       zoomBy(delta, e.clientX, e.clientY);
     }, { passive: false });
 
+    
+    // ---------------- CARD DETAIL MODAL (DESPLEGADA Y AMPLIADA) ----------------
+    let currentDetailIndex = 0;
+
+    function openDetailModal(idx) {
+      currentDetailIndex = idx;
+      const item = MEDIA_DATA[idx];
+      if (!item) return;
+
+      const dialog = document.getElementById('card-detail-dialog');
+      const photoHtml = item.image 
+        ? `<div class="detail-photo-wrap" onclick="openLightbox('${item.image}')">
+             <img src="${item.image}" alt="${item.name}">
+             <span class="detail-photo-badge">🔍 Clic para ampliar a pantalla completa</span>
+           </div>`
+        : `<div class="no-photo-badge" style="padding: 24px; background: rgba(0,0,0,0.03); border-radius: 14px;">Sin registro fotográfico disponible en el documento</div>`;
+
+      const prevDisabled = idx === 0 ? 'disabled' : '';
+      const nextDisabled = idx === MEDIA_DATA.length - 1 ? 'disabled' : '';
+
+      dialog.innerHTML = `
+        <div class="detail-header">
+          <div class="detail-title-wrap">
+            <span class="detail-badge">#${item.index} de ${MEDIA_DATA.length}</span>
+            <h2 class="detail-title" title="${item.name}">${item.name}</h2>
+          </div>
+          <div class="detail-header-actions">
+            <button class="detail-nav-btn" title="Anterior (←)" ${prevDisabled} onclick="navigateDetail(-1)">‹</button>
+            <button class="detail-nav-btn" title="Siguiente (→)" ${nextDisabled} onclick="navigateDetail(1)">›</button>
+            <button class="detail-close-btn" title="Cerrar (Esc)" onclick="closeDetailModal()">✕</button>
+          </div>
+        </div>
+
+        <div class="detail-body">
+          ${photoHtml}
+
+          <div class="detail-section">
+            <div class="detail-section-label">a. Componentes principales</div>
+            <div class="detail-section-content">${item.components}</div>
+          </div>
+
+          <div class="detail-section">
+            <div class="detail-section-label">b. Características</div>
+            <div class="detail-section-content">${item.characteristics}</div>
+          </div>
+
+          <div class="detail-section">
+            <div class="detail-section-label">c. Usos</div>
+            <div class="detail-section-content">${item.uses}</div>
+          </div>
+
+          <div class="detail-section">
+            <div class="detail-section-label">d. Visualización de colonias</div>
+            <div class="detail-section-content">${item.visualization}</div>
+          </div>
+        </div>
+
+        <div class="detail-footer">
+          <span class="detail-keyboard-hint">Atajos: <strong>←</strong> / <strong>→</strong> navegar • <strong>Esc</strong> cerrar</span>
+          <button class="detail-footer-btn secondary" onclick="closeDetailModal()">Cerrar</button>
+        </div>
+      `;
+
+      const modal = document.getElementById('card-detail-modal');
+      modal.classList.add('active');
+      dialog.scrollTop = 0;
+    }
+
+    function closeDetailModal() {
+      const modal = document.getElementById('card-detail-modal');
+      modal.classList.remove('active');
+    }
+
+    function onDetailBackdropClick(e) {
+      if (e.target === document.getElementById('card-detail-modal')) {
+        closeDetailModal();
+      }
+    }
+
+    function navigateDetail(step) {
+      const newIdx = currentDetailIndex + step;
+      if (newIdx >= 0 && newIdx < MEDIA_DATA.length) {
+        openDetailModal(newIdx);
+      }
+    }
+
     // Lightbox Modal
     function openLightbox(src) {
       if (!src) return;
@@ -739,11 +1170,29 @@
 
     // Keyboard Shortcuts
     window.addEventListener('keydown', (e) => {
+      // Lightbox open?
+      const lightboxModal = document.getElementById('lightbox-modal');
+      if (lightboxModal && lightboxModal.classList.contains('active')) {
+        if (e.key === 'Escape') closeLightbox();
+        return;
+      }
+
+      // Detail Modal open?
+      const detailModal = document.getElementById('card-detail-modal');
+      if (detailModal && detailModal.classList.contains('active')) {
+        if (e.key === 'Escape') {
+          closeDetailModal();
+        } else if (e.key === 'ArrowLeft') {
+          navigateDetail(-1);
+        } else if (e.key === 'ArrowRight') {
+          navigateDetail(1);
+        }
+        return;
+      }
+
       if (e.code === 'Space') {
         spacePressed = true;
         document.body.classList.add('space-down');
-      } else if (e.key === 'Escape') {
-        closeLightbox();
       }
     });
 
